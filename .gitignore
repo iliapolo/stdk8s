@@ -45,6 +45,9 @@ jspm_packages/
 # synthesized by projen
 /.eslintrc.json
 # exclude jsii outputs
+
+.vscode/
+
 dist
 .jsii
 tsconfig.json
