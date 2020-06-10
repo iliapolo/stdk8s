@@ -4,3 +4,4 @@ export * from './service';
 export * from './config-map';
 export * from './stateful-set';
 export * from './deployment';
+export * from './base';

@@ -1,6 +1,6 @@
 import * as spec from '../spec';
 import * as k8s from '../../imports/k8s';
-import { Lazy } from 'constructs';
+import { onSynth } from '../utils';
 
 export interface DeploymentSpecProps {
 
@@ -33,14 +33,10 @@ export class DeploymentSpec {
   public _toKube(): k8s.DeploymentSpec {
     return onSynth(() => ({
       replicas: this.replicas,
-      template: this.template.build(),
+      template: this.template._toKube(),
       selector: {
         matchLabels: this.labels
       }
     }));
   }
-}
-
-function onSynth<T>(produce: () => T): T {
-  return Lazy.anyValue({ produce: () => produce() }) as unknown as T;
 }

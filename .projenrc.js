@@ -1,6 +1,7 @@
 const { JsiiProject, Semver } = require('projen');
 
-const constructsDependency = Semver.pinned('2.0.1')
+const constructsDependency = Semver.caret('2.0.1')
+const cdk8sDependency = Semver.caret('0.25.0')
 
 const project = new JsiiProject({
   name: 'stdk8s',
@@ -12,9 +13,11 @@ const project = new JsiiProject({
   authorEmail: 'epolon@amazon.com',
   dependencies: {
     constructs: constructsDependency,
+    cdk8s: cdk8sDependency,
   },
   peerDependencies: {
     constructs: constructsDependency,
+    cdk8s: cdk8sDependency,
   },
   devDependencies: {
     'cdk8s-cli': Semver.caret('0.21.0')

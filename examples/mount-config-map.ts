@@ -1,6 +1,6 @@
 import * as stdk8s from '../lib';
 import * as cdk8s from 'cdk8s';
-import { stat } from 'fs';
+import { Volume } from '../lib';
 
 const app = new cdk8s.App();
 const chart = new cdk8s.Chart(app, 'MountConfigMap');
@@ -9,10 +9,11 @@ const configMap = stdk8s.ConfigMap.fromDirectory(chart, 'Config', '/path/to/conf
 
 const container = new stdk8s.Container({
   image: 'elasticsearch:1.6.5',
-  name: 'elastisearch'
+  name: 'elastisearch',
+  port: 9200
 });
 
-const volume = configMap.asVolume();
+const volume = Volume.fromConfigMap(configMap);
 
 // give this container access to the config directory
 container.mount({
@@ -43,10 +44,10 @@ podSpec.addVolume(volume);
 new stdk8s.Pod(chart, 'ElasticSearchPod', { spec: podSpec })
 new stdk8s.StatefulSet(chart, 'ElasticSearchStatefulSet', {
   spec: new stdk8s.StatefulSetSpec({
-    podSpec: podSpec
-    podMetadata: podMetadata
-  }),
-  metadata:
+    podTemplateSpec: new stdk8s.PodTemplateSpec({
+      podSpec: podSpec,
+    })
+  })
 })
 
 /**

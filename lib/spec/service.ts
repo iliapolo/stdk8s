@@ -1,4 +1,5 @@
 import * as k8s from '../../imports/k8s';
+import { onSynth } from '../utils';
 
 export interface ServicePort {
 
@@ -46,7 +47,10 @@ export class ServiceSpec {
     this.labels[key] = value;
   }
 
-  public build(): k8s.ServiceSpec {
+  /**
+   * @internal
+   */
+  public _toKube(): k8s.ServiceSpec {
 
     const ports: k8s.ServicePort[] = [];
 
@@ -57,13 +61,13 @@ export class ServiceSpec {
       })
     }
 
-    return {
+    return onSynth(() => ({
       clusterIP: this.clusterIP,
       externalIPs: this.externalIPs,
       type: this.type,
       selector: this.labels,
       ports: ports
-    }
+    }));
   }
 
 

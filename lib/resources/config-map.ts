@@ -2,6 +2,7 @@ import { Construct, Lazy } from 'constructs';
 import * as k8s from '../../imports/k8s';
 import * as model from '../model';
 import { ResourceProps, Resource } from './base';
+import * as cdk8s from 'cdk8s';
 
 export interface ConfigMapProps extends ResourceProps {
 
@@ -13,6 +14,8 @@ export interface ConfigMapProps extends ResourceProps {
 
 export class ConfigMap extends Resource {
 
+  public readonly apiObject: cdk8s.ApiObject;
+
   private readonly binaryData?: { [key: string]: string };
   private readonly data?: { [key: string]: string };
 
@@ -22,8 +25,11 @@ export class ConfigMap extends Resource {
     this.binaryData = props.binaryData;
     this.data = props.data;
 
-    new k8s.ConfigMap(this, 'ConfigMap', {
-      metadata: (Lazy.anyValue({ produce: () => this.metadata.build() }) as unknown) as k8s.ObjectMeta,
+    this.apiObject = new k8s.ConfigMap(this, 'ConfigMap', {
+      metadata: {
+        name: this.metadata?.name,
+        ...this.metadata?._toKube()
+      },
       data: (Lazy.anyValue({ produce: () => this.data }) as unknown) as Record<string, string>,
       binaryData: (Lazy.anyValue({ produce: () => this.binaryData }) as unknown) as Record<string, string>
     })
@@ -33,7 +39,7 @@ export class ConfigMap extends Resource {
   public static fromDirectory(scope: Construct, id: string, directory: string): ConfigMap {
 
     function readDirectory(): Record<string, string> {
-      throw new Error('No implemented!');
+      throw new Error(`No implemented! (${directory})`);
     }
 
     function name(): string {

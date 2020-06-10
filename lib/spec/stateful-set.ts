@@ -26,16 +26,16 @@ export class StatefulSetSpec {
     this.labels[key] = value;
   }
 
-  public build(): k8s.StatefulSetSpec {
+  /**
+   * @internal
+   */
+  public _toKube(): k8s.StatefulSetSpec {
 
-    
-    this.podTemplateSpec.metadata.addLabel()
-
-    this.selectByLabel();
+    // TODO: validate serviceName
 
     return {
-      serviceName: this.serviceName,
-      template: this.podTemplateSpec.build(),
+      serviceName: this.serviceName!,
+      template: this.podTemplateSpec._toKube(),
       selector: {
         matchLabels: this.labels
       }

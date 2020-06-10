@@ -3,7 +3,7 @@ import * as k8s from '../../imports/k8s';
 
 export interface PodSpecProps {
 
-  readonly containers: model.Container[];
+  readonly containers?: model.Container[];
 
   readonly volumes?: model.Volume[];
 
@@ -27,7 +27,10 @@ export class PodSpec {
     this.volumes.push(volume);
   }
 
-  public build(): k8s.PodSpec {
+  /**
+   * @internal
+   */
+  public _toKube(): k8s.PodSpec {
 
     if (this.containers.length == 0) {
       throw new Error('PodSpec must have at least 1 container');

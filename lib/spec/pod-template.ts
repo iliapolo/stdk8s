@@ -1,6 +1,7 @@
 import * as model from '../model';
 import * as spec from '../spec';
 import * as k8s from '../../imports/k8s';
+import { onSynth } from '../utils';
 
 export interface PodTemplateSpecProps {
 
@@ -20,11 +21,14 @@ export class PodTemplateSpec {
     this.podSpec = props.podSpec ?? new spec.PodSpec();
   }
 
-  public build(): k8s.PodTemplateSpec {
-    return {
-      metadata: this.metadata.build(),
-      spec: this.podSpec.build()
-    }
+  /**
+   * @internal
+   */
+  public _toKube(): k8s.PodTemplateSpec {
+    return onSynth(() => ({
+      metadata: this.metadata._toKube(),
+      spec: this.podSpec._toKube()
+    }));
   }
 
 }

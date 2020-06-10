@@ -7,7 +7,7 @@ export interface ContainerProps {
   readonly name: string;
 
   // TODO: make this an array of structs (see k8s#ContainerPort)
-  readonly port?: number
+  readonly port: number
 
 }
 
@@ -16,7 +16,7 @@ export class Container {
   public readonly volumeMounts: model.VolumeMount[] = [];
   public readonly name: string;
   public readonly image: string;
-  public readonly port?: number;
+  public readonly port: number;
 
   constructor(props: ContainerProps) {
     this.name = props.name;

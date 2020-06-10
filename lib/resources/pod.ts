@@ -1,8 +1,8 @@
 import * as k8s from '../../imports/k8s';
-import { Construct, Lazy } from 'constructs';
-import * as model from '../model';
+import { Construct } from 'constructs';
 import * as spec from '../spec';
 import { ResourceProps, Resource } from './base';
+import * as cdk8s from 'cdk8s';
 
 export interface PodProps extends ResourceProps {
 
@@ -12,6 +12,8 @@ export interface PodProps extends ResourceProps {
 
 export class Pod extends Resource {
 
+  public readonly apiObject: cdk8s.ApiObject;
+
   public readonly spec: spec.PodSpec;
 
   constructor(scope: Construct, id: string, props: PodProps = {}) {
@@ -19,9 +21,12 @@ export class Pod extends Resource {
 
     this.spec = props.spec ?? new spec.PodSpec();
 
-    new k8s.Pod(this, 'Pod', {
-      metadata: (Lazy.anyValue({ produce: () => this.metadata.build() }) as unknown) as k8s.ObjectMeta,
-      spec: (Lazy.anyValue({ produce: () => this.spec.build() }) as unknown) as k8s.PodSpec
+    this.apiObject = new k8s.Pod(this, 'Pod', {
+      metadata: {
+        name: this.metadata?.name,
+        ...this.metadata?._toKube()
+      },
+      spec: this.spec._toKube()
     })
   }
 

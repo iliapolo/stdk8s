@@ -1,9 +1,9 @@
 import * as k8s from '../../imports/k8s';
-import { Construct, Lazy, Node } from 'constructs';
-import * as model from '../model';
+import { Construct, Node } from 'constructs';
 import * as spec from '../spec';
 import { Service } from './service';
 import { Resource, ResourceProps } from './base';
+import * as cdk8s from 'cdk8s';
 
 export interface DeploymentProps extends ResourceProps {
 
@@ -18,6 +18,8 @@ export interface ExposeOptions {
 
 export class Deployment extends Resource {
 
+  public readonly apiObject: cdk8s.ApiObject;
+
   public readonly spec: spec.DeploymentSpec;
 
   constructor(scope: Construct, id: string, props: DeploymentProps = {}) {
@@ -25,9 +27,12 @@ export class Deployment extends Resource {
 
     this.spec = props.spec ?? new spec.DeploymentSpec();
 
-    new k8s.Deployment(this, 'Deployment', {
-      metadata: (Lazy.anyValue({ produce: () => this.metadata.build() }) as unknown) as k8s.ObjectMeta,
-      spec: this.spec.build()
+    this.apiObject = new k8s.Deployment(this, 'Deployment', {
+      metadata: {
+        name: this.metadata?.name,
+        ...this.metadata?._toKube()
+      },
+      spec: this.spec._toKube()
     })
   }
 
