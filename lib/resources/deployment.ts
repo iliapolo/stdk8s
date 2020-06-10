@@ -3,10 +3,9 @@ import { Construct, Lazy, Node } from 'constructs';
 import * as model from '../model';
 import * as spec from '../spec';
 import { Service } from './service';
+import { Resource, ResourceProps } from './base';
 
-export interface DeploymentProps {
-
-  readonly metadata?: model.ObjectMeta;
+export interface DeploymentProps extends ResourceProps {
 
   readonly spec?: spec.DeploymentSpec;
 
@@ -17,20 +16,18 @@ export interface ExposeOptions {
   readonly port: number;
 }
 
-export class Deployment extends Construct {
+export class Deployment extends Resource {
 
   public readonly spec: spec.DeploymentSpec;
-  public readonly metadata: model.ObjectMeta;
 
   constructor(scope: Construct, id: string, props: DeploymentProps = {}) {
-    super(scope, id);
+    super(scope, id, props);
 
     this.spec = props.spec ?? new spec.DeploymentSpec();
-    this.metadata = props.metadata ?? new model.ObjectMeta();
 
     new k8s.Deployment(this, 'Deployment', {
       metadata: (Lazy.anyValue({ produce: () => this.metadata.build() }) as unknown) as k8s.ObjectMeta,
-      spec: (Lazy.anyValue({ produce: () => this.spec.build() }) as unknown) as k8s.DeploymentSpec
+      spec: this.spec.build()
     })
   }
 

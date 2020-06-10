@@ -27,6 +27,12 @@ export class StatefulSetSpec {
   }
 
   public build(): k8s.StatefulSetSpec {
+
+    
+    this.podTemplateSpec.metadata.addLabel()
+
+    this.selectByLabel();
+
     return {
       serviceName: this.serviceName,
       template: this.podTemplateSpec.build(),

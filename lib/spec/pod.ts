@@ -3,7 +3,7 @@ import * as k8s from '../../imports/k8s';
 
 export interface PodSpecProps {
 
-  readonly containers?: model.Container[];
+  readonly containers: model.Container[];
 
   readonly volumes?: model.Volume[];
 

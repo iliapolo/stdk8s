@@ -2,25 +2,22 @@ import * as k8s from '../../imports/k8s';
 import { Construct, Lazy } from 'constructs';
 import * as model from '../model';
 import * as spec from '../spec';
+import { ResourceProps, Resource } from './base';
 
-export interface PodProps {
-
-  readonly metadata?: model.ObjectMeta;
+export interface PodProps extends ResourceProps {
 
   readonly spec?: spec.PodSpec;
 
 }
 
-export class Pod extends Construct {
+export class Pod extends Resource {
 
   public readonly spec: spec.PodSpec;
-  public readonly metadata: model.ObjectMeta;
 
   constructor(scope: Construct, id: string, props: PodProps = {}) {
-    super(scope, id);
+    super(scope, id, props);
 
     this.spec = props.spec ?? new spec.PodSpec();
-    this.metadata = props.metadata ?? new model.ObjectMeta();
 
     new k8s.Pod(this, 'Pod', {
       metadata: (Lazy.anyValue({ produce: () => this.metadata.build() }) as unknown) as k8s.ObjectMeta,

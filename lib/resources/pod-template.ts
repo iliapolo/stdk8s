@@ -1,25 +1,21 @@
 import * as k8s from '../../imports/k8s';
 import { Construct, Lazy } from 'constructs';
-import * as model from '../model';
 import * as spec from '../spec';
+import { Resource, ResourceProps } from './base';
 
-export interface PodTemplateProps {
-
-  readonly metadata: model.ObjectMeta;
+export interface PodTemplateProps extends ResourceProps {
 
   readonly spec: spec.PodTemplateSpec;
 
 }
 
-export class PodTemplate extends Construct {
+export class PodTemplate extends Resource {
 
-  private readonly metadata: model.ObjectMeta;
   private readonly spec: spec.PodTemplateSpec;
 
   constructor(scope: Construct, name: string, props: PodTemplateProps) {
-    super(scope, name);
+    super(scope, name, props);
 
-    this.metadata = props.metadata;
     this.spec = props.spec;
 
     new k8s.PodTemplate(this, 'PodTemplate', {

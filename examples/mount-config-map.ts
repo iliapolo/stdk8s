@@ -1,5 +1,6 @@
 import * as stdk8s from '../lib';
 import * as cdk8s from 'cdk8s';
+import { stat } from 'fs';
 
 const app = new cdk8s.App();
 const chart = new cdk8s.Chart(app, 'MountConfigMap');
@@ -42,10 +43,10 @@ podSpec.addVolume(volume);
 new stdk8s.Pod(chart, 'ElasticSearchPod', { spec: podSpec })
 new stdk8s.StatefulSet(chart, 'ElasticSearchStatefulSet', {
   spec: new stdk8s.StatefulSetSpec({
-    podTemplateSpec: new stdk8s.PodTemplateSpec({
-      podSpec: podSpec
-    })
-  })
+    podSpec: podSpec
+    podMetadata: podMetadata
+  }),
+  metadata:
 })
 
 /**

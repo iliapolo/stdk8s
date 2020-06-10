@@ -1,30 +1,26 @@
 import { Construct, Lazy } from 'constructs';
 import * as k8s from '../../imports/k8s';
 import * as model from '../model';
-import { Volume } from '../model';
+import { ResourceProps, Resource } from './base';
 
-export interface ConfigMapProps {
+export interface ConfigMapProps extends ResourceProps {
 
   readonly binaryData?: { [key: string]: string };
 
   readonly data?: { [key: string]: string };
 
-  readonly metadata: model.ObjectMeta;
-
 }
 
-export class ConfigMap extends Construct {
+export class ConfigMap extends Resource {
 
   private readonly binaryData?: { [key: string]: string };
   private readonly data?: { [key: string]: string };
-  private readonly metadata: model.ObjectMeta;
 
   private constructor(scope: Construct, id: string, props: ConfigMapProps) {
-    super(scope, id);
+    super(scope, id, props);
 
     this.binaryData = props.binaryData;
     this.data = props.data;
-    this.metadata = props.metadata;
 
     new k8s.ConfigMap(this, 'ConfigMap', {
       metadata: (Lazy.anyValue({ produce: () => this.metadata.build() }) as unknown) as k8s.ObjectMeta,
@@ -32,11 +28,6 @@ export class ConfigMap extends Construct {
       binaryData: (Lazy.anyValue({ produce: () => this.binaryData }) as unknown) as Record<string, string>
     })
 
-  }
-
-  public asVolume(): model.Volume {
-    // TODO: figure out where and how names are generated and how to use it here.
-    return Volume.fromConfigMap(this.metadata.name!)
   }
 
   public static fromDirectory(scope: Construct, id: string, directory: string): ConfigMap {
