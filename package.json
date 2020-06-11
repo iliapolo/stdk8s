@@ -52,10 +52,7 @@
     "constructs": "^2.0.1",
     "cdk8s": "^0.25.0"
   },
-  "dependencies": {
-    "constructs": "^2.0.1",
-    "cdk8s": "^0.25.0"
-  },
+  "dependencies": {},
   "bundledDependencies": [],
   "license": "Apache-2.0",
   "version": "0.0.0",
