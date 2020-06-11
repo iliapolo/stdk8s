@@ -1,7 +1,7 @@
 import { Construct, Lazy } from 'constructs';
 import * as k8s from '../../imports/k8s';
 import * as model from '../model';
-import { ResourceProps, Resource } from './base';
+import { ResourceProps, Resource, IResource } from './base';
 import * as cdk8s from 'cdk8s';
 
 export interface ConfigMapProps extends ResourceProps {
@@ -12,14 +12,21 @@ export interface ConfigMapProps extends ResourceProps {
 
 }
 
-export class ConfigMap extends Resource {
+export interface IConfigMap extends IResource {
+
+}
+
+export class ConfigMap extends Resource implements IConfigMap {
+  public static fromConfigMapName(name: string): IConfigMap {
+    return { name };
+  }
 
   public readonly apiObject: cdk8s.ApiObject;
 
   private readonly binaryData?: { [key: string]: string };
   private readonly data?: { [key: string]: string };
 
-  private constructor(scope: Construct, id: string, props: ConfigMapProps) {
+  public constructor(scope: Construct, id: string, props: ConfigMapProps) {
     super(scope, id, props);
 
     this.binaryData = props.binaryData;

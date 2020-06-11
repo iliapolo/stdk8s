@@ -1,5 +1,6 @@
 import * as model from '../model';
 import * as k8s from '../../imports/k8s';
+import { IServiceAccount } from '../resources/service-account';
 
 export interface PodSpecProps {
 
@@ -12,6 +13,9 @@ export interface PodSpecProps {
    */
   readonly restartPolicy?: RestartPolicy;
 
+  readonly serviceAccout?: IServiceAccount;
+}
+
 export enum RestartPolicy {
   ALWAYS = 'Always',
   ON_FAILURE = 'OnFailure',
@@ -23,11 +27,13 @@ export class PodSpec {
   public containers: model.Container[];
   public volumes: model.Volume[];
   public restartPolicy?: RestartPolicy;
+  public serviceAccount?: IServiceAccount;
 
   constructor(props: PodSpecProps = {}) {
     this.containers = props.containers ?? [];
     this.volumes = props.volumes ?? [];
     this.restartPolicy = props.restartPolicy;
+    this.serviceAccount = props.serviceAccout;
   }
 
   public addContainer(container: model.Container): void {
@@ -89,6 +95,7 @@ export class PodSpec {
 
     return {
       restartPolicy: this.restartPolicy,
+      serviceAccountName: this.serviceAccount?.name,
       containers: containers,
       volumes: volumes,
     }
