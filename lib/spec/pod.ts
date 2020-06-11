@@ -1,6 +1,7 @@
 import * as model from '../model';
 import * as k8s from '../../imports/k8s';
 import { IServiceAccount } from '../resources/service-account';
+import { EnvValue } from '../model';
 
 export interface PodSpecProps {
 
@@ -84,6 +85,7 @@ export class PodSpec {
         ports: ports,
         volumeMounts: volumeMounts,
         command: container.command,
+        env: renderEnv(container.env)
       });
 
       if (container.port) {
@@ -98,6 +100,18 @@ export class PodSpec {
       serviceAccountName: this.serviceAccount?.name,
       containers: containers,
       volumes: volumes,
+    };
+
+    function renderEnv(env?: { [name: string]: EnvValue }): k8s.EnvVar[] {
+      const result = new Array<k8s.EnvVar>();
+      for (const [name, v] of Object.entries(env ?? {})) {
+        result.push({
+          name,
+          value: v.value,
+          valueFrom: v.valueFrom
+        });
+      }
+      return result;
     }
   }
 
