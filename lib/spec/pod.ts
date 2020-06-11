@@ -7,16 +7,27 @@ export interface PodSpecProps {
 
   readonly volumes?: model.Volume[];
 
+  /**
+   * @default RestartPolicy.ALWAYS
+   */
+  readonly restartPolicy?: RestartPolicy;
+
+export enum RestartPolicy {
+  ALWAYS = 'Always',
+  ON_FAILURE = 'OnFailure',
+  NEVER = 'Never'
 }
 
 export class PodSpec {
 
   public containers: model.Container[];
   public volumes: model.Volume[];
+  public restartPolicy?: RestartPolicy;
 
   constructor(props: PodSpecProps = {}) {
     this.containers = props.containers ?? [];
     this.volumes = props.volumes ?? [];
+    this.restartPolicy = props.restartPolicy;
   }
 
   public addContainer(container: model.Container): void {
@@ -59,17 +70,25 @@ export class PodSpec {
         })
       }
 
+      const ports = new Array();
+
       containers.push({
         name: container.name,
         image: container.image,
-        ports: [{
-          containerPort: container.port,
-        }],
+        ports: ports,
         volumeMounts: volumeMounts,
-      })
+        command: container.command,
+      });
+
+      if (container.port) {
+        ports.push({
+          containerPort: container.port,
+        });
+      }
     }
 
     return {
+      restartPolicy: this.restartPolicy,
       containers: containers,
       volumes: volumes,
     }
