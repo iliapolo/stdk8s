@@ -42,7 +42,7 @@ export class PodSpec {
     for (const volume of this.volumes) {
       volumes.push({
         name: volume.name,
-        configMap: volume.configMap
+        configMap: volume.configMap,
       })
     }
 
@@ -55,7 +55,7 @@ export class PodSpec {
           // TODO: validate this volume is actually one of the pod volumes.
           // later we can consider automatically adding the volume.
           name: volumeMount.volume.name,
-          mountPath: volumeMount.path
+          mountPath: volumeMount.path,
         })
       }
 
@@ -63,15 +63,15 @@ export class PodSpec {
         name: container.name,
         image: container.image,
         ports: [{
-          containerPort: container.port
+          containerPort: container.port,
         }],
-        volumeMounts: volumeMounts
+        volumeMounts: volumeMounts,
       })
     }
 
     return {
       containers: containers,
-      volumes: volumes
+      volumes: volumes,
     }
   }
 

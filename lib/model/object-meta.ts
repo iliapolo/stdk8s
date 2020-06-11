@@ -48,7 +48,7 @@ export class ObjectMeta {
       clusterName: this.clusterName,
       labels: this.labels,
       name: this.name,
-      namespace: this.namespace
+      namespace: this.namespace,
     }));
   }
 

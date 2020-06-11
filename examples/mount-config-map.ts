@@ -10,7 +10,7 @@ const configMap = stdk8s.ConfigMap.fromDirectory(chart, 'Config', '/path/to/conf
 const container = new stdk8s.Container({
   image: 'elasticsearch:1.6.5',
   name: 'elastisearch',
-  port: 9200
+  port: 9200,
 });
 
 const volume = Volume.fromConfigMap(configMap);
@@ -18,7 +18,7 @@ const volume = Volume.fromConfigMap(configMap);
 // give this container access to the config directory
 container.mount({
   volume: volume,
-  path: '/etc/elasticsearch/config'
+  path: '/etc/elasticsearch/config',
 })
 
 const pod = new stdk8s.Pod(chart, 'ElasticSearchPod');
@@ -46,8 +46,8 @@ new stdk8s.StatefulSet(chart, 'ElasticSearchStatefulSet', {
   spec: new stdk8s.StatefulSetSpec({
     podTemplateSpec: new stdk8s.PodTemplateSpec({
       podSpec: podSpec,
-    })
-  })
+    }),
+  }),
 })
 
 /**

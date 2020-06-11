@@ -57,7 +57,7 @@ export class ServiceSpec {
     if (this.port) {
       ports.push({
         port: this.port.port,
-        targetPort: this.port.targetPort
+        targetPort: this.port.targetPort,
       })
     }
 
@@ -66,7 +66,7 @@ export class ServiceSpec {
       externalIPs: this.externalIPs,
       type: this.type,
       selector: this.labels,
-      ports: ports
+      ports: ports,
     }));
   }
 

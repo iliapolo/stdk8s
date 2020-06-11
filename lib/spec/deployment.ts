@@ -35,8 +35,8 @@ export class DeploymentSpec {
       replicas: this.replicas,
       template: this.template._toKube(),
       selector: {
-        matchLabels: this.labels
-      }
+        matchLabels: this.labels,
+      },
     }));
   }
 }

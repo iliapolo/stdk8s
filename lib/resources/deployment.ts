@@ -30,9 +30,9 @@ export class Deployment extends Resource {
     this.apiObject = new k8s.Deployment(this, 'Deployment', {
       metadata: {
         name: this.metadata?.name,
-        ...this.metadata?._toKube()
+        ...this.metadata?._toKube(),
       },
-      spec: this.spec._toKube()
+      spec: this.spec._toKube(),
     })
   }
 
@@ -53,9 +53,9 @@ export class Deployment extends Resource {
       spec: new spec.ServiceSpec({
         port: {
           port: options.port,
-          targetPort: containerPort
-        }
-      })
+          targetPort: containerPort,
+        },
+      }),
     })
 
     service.spec.selectByLabel(labelKey, labelValue);

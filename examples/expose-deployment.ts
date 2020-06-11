@@ -8,7 +8,7 @@ const chart = new cdk8s.Chart(app, 'ExposeDeployment');
 const container = new stdk8s.Container({
   image: 'elasticsearch:1.6.5',
   name: 'elastisearch',
-  port: 9200
+  port: 9200,
 });
 
 const deployment = new stdk8s.Deployment(chart, 'ElasticSearchDeployment')

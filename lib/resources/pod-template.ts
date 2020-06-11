@@ -24,9 +24,9 @@ export class PodTemplate extends Resource {
     this.apiObject = new k8s.PodTemplate(this, 'PodTemplate', {
       metadata: {
         name: this.metadata?.name,
-        ...this.metadata?._toKube()
+        ...this.metadata?._toKube(),
       },
-      template: this.spec._toKube()
+      template: this.spec._toKube(),
     })
 
   }

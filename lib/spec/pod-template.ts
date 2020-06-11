@@ -27,7 +27,7 @@ export class PodTemplateSpec {
   public _toKube(): k8s.PodTemplateSpec {
     return onSynth(() => ({
       metadata: this.metadata._toKube(),
-      spec: this.podSpec._toKube()
+      spec: this.podSpec._toKube(),
     }));
   }
 

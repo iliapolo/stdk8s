@@ -1,5 +1,5 @@
-import { Construct } from "constructs";
-import { ObjectMeta } from "../model";
+import { Construct } from 'constructs';
+import { ObjectMeta } from '../model';
 import * as cdk8s from 'cdk8s';
 
 export interface ResourceProps {

@@ -28,10 +28,10 @@ export class ConfigMap extends Resource {
     this.apiObject = new k8s.ConfigMap(this, 'ConfigMap', {
       metadata: {
         name: this.metadata?.name,
-        ...this.metadata?._toKube()
+        ...this.metadata?._toKube(),
       },
       data: (Lazy.anyValue({ produce: () => this.data }) as unknown) as Record<string, string>,
-      binaryData: (Lazy.anyValue({ produce: () => this.binaryData }) as unknown) as Record<string, string>
+      binaryData: (Lazy.anyValue({ produce: () => this.binaryData }) as unknown) as Record<string, string>,
     })
 
   }
@@ -49,8 +49,8 @@ export class ConfigMap extends Resource {
     return new ConfigMap(scope, id, {
       data: readDirectory(),
       metadata: new model.ObjectMeta({
-        name: name()
-      })
+        name: name(),
+      }),
     })
   }
 

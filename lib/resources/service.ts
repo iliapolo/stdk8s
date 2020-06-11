@@ -24,9 +24,9 @@ export class Service extends Resource {
     this.apiObject = new k8s.Service(this, 'Pod', {
       metadata: {
         name: this.metadata?.name,
-        ...this.metadata?._toKube()
+        ...this.metadata?._toKube(),
       },
-      spec: this.spec._toKube()
+      spec: this.spec._toKube(),
     })
   }
 

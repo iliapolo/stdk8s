@@ -37,8 +37,8 @@ export class StatefulSetSpec {
       serviceName: this.serviceName!,
       template: this.podTemplateSpec._toKube(),
       selector: {
-        matchLabels: this.labels
-      }
+        matchLabels: this.labels,
+      },
     }
   }
 

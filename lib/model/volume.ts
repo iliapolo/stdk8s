@@ -9,11 +9,11 @@ export interface ConfigMapVolumeSource {
 export class Volume {
 
   private constructor(public readonly name: string,
-                      public readonly configMap?: ConfigMapVolumeSource) {}
+    public readonly configMap?: ConfigMapVolumeSource) {}
 
   public static fromConfigMap(configMap: ConfigMap): Volume {
     return new Volume(`${configMap.name}-volume`, {
-      name: configMap.name
+      name: configMap.name,
     });
   }
 
