@@ -11,10 +11,6 @@ const project = new JsiiProject({
   repository: 'https://github.com/iliapolo/stdk8s.git',
   authorName: 'Eli Polonsky',
   authorEmail: 'epolon@amazon.com',
-  dependencies: {
-    constructs: constructsDependency,
-    cdk8s: cdk8sDependency,
-  },
   peerDependencies: {
     constructs: constructsDependency,
     cdk8s: cdk8sDependency,

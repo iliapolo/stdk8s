@@ -1116,7 +1116,7 @@ cdk8s@0.21.0:
     json-stable-stringify "^1.0.1"
     yaml "^1.7.2"
 
-cdk8s@^0.25.0:
+cdk8s@0.25.0:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/cdk8s/-/cdk8s-0.25.0.tgz#60e1eed0990a631b286d04a4033d19f0c21ed463"
   integrity sha512-9Vyukkb/NwHtXLQ9lZqGqD8N37iOr2ikNX2rnKHavB7bBfoAwOsgsVBa6gzhMdXbVZplmd6vDJ0L/KChr6ZauQ==
