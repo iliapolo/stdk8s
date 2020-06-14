@@ -8,7 +8,11 @@ export interface ResourceProps {
 
 }
 
-export abstract class Resource extends Construct {
+export interface IResource {
+  readonly name: string;
+}
+
+export abstract class Resource extends Construct implements IResource {
 
   protected metadata?: ObjectMeta;
 

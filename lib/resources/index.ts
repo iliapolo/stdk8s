@@ -5,3 +5,5 @@ export * from './config-map';
 export * from './stateful-set';
 export * from './deployment';
 export * from './base';
+export * from './job';
+export * from './service-account';

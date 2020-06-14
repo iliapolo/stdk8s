@@ -1,5 +1,7 @@
 import * as model from '../model';
 import * as k8s from '../../imports/k8s';
+import { IServiceAccount } from '../resources/service-account';
+import { EnvValue } from '../model';
 
 export interface PodSpecProps {
 
@@ -12,6 +14,9 @@ export interface PodSpecProps {
    */
   readonly restartPolicy?: RestartPolicy;
 
+  readonly serviceAccout?: IServiceAccount;
+}
+
 export enum RestartPolicy {
   ALWAYS = 'Always',
   ON_FAILURE = 'OnFailure',
@@ -23,11 +28,13 @@ export class PodSpec {
   public containers: model.Container[];
   public volumes: model.Volume[];
   public restartPolicy?: RestartPolicy;
+  public serviceAccount?: IServiceAccount;
 
   constructor(props: PodSpecProps = {}) {
     this.containers = props.containers ?? [];
     this.volumes = props.volumes ?? [];
     this.restartPolicy = props.restartPolicy;
+    this.serviceAccount = props.serviceAccout;
   }
 
   public addContainer(container: model.Container): void {
@@ -78,6 +85,8 @@ export class PodSpec {
         ports: ports,
         volumeMounts: volumeMounts,
         command: container.command,
+        workingDir: container.workingDir,
+        env: renderEnv(container.env),
       });
 
       if (container.port) {
@@ -89,8 +98,21 @@ export class PodSpec {
 
     return {
       restartPolicy: this.restartPolicy,
+      serviceAccountName: this.serviceAccount?.name,
       containers: containers,
       volumes: volumes,
+    };
+
+    function renderEnv(env?: { [name: string]: EnvValue }): k8s.EnvVar[] {
+      const result = new Array<k8s.EnvVar>();
+      for (const [name, v] of Object.entries(env ?? {})) {
+        result.push({
+          name,
+          value: v.value,
+          valueFrom: v.valueFrom,
+        });
+      }
+      return result;
     }
   }
 
