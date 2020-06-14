@@ -33,10 +33,8 @@ export interface EnvValueFromConfigMapOptions {
 }
 
 export class EnvValue {
-  public static of(value: string) {
-    return {
-      value
-    };
+  public static of(value: string): EnvValue  {
+    return { value };
   }
 
   public static fromConfigMap(configMap: IConfigMap, key: string, options: EnvValueFromConfigMapOptions = { }): EnvValue {
