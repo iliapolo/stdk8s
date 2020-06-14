@@ -52,7 +52,7 @@ export class ConfigMap extends Resource implements IConfigMap {
 
   public addDirectory(localDir: string, options: AddDirectoryOptions = { }) {
     if (options.recursive) {
-      throw new Error(`"recursive" is not supported (see https://github.com/kubernetes/kubernetes/pull/63362)`);
+      throw new Error("'recursive' is not supported (see https://github.com/kubernetes/kubernetes/pull/63362)");
     }
 
     const exclude = options.exclude ?? [];
@@ -75,7 +75,7 @@ export class ConfigMap extends Resource implements IConfigMap {
       const relativeFilePath = keyPrefix + file;
       if (options.recursive && fs.statSync(filePath).isDirectory()) {
         this.addDirectory(filePath, {
-          keyPrefix: relativeFilePath + '/'
+          keyPrefix: relativeFilePath + '/',
         });
       } else {
         this.addFile(filePath, relativeFilePath);
