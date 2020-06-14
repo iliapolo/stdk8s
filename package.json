@@ -52,8 +52,12 @@
     "constructs": "^2.0.1",
     "cdk8s": "^0.25.0"
   },
-  "dependencies": {},
-  "bundledDependencies": [],
+  "dependencies": {
+    "minimatch": "^3.0.4"
+  },
+  "bundledDependencies": [
+    "minimatch"
+  ],
   "license": "Apache-2.0",
   "version": "0.0.0",
   "types": "lib/index.d.ts",

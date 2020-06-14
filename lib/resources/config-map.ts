@@ -4,6 +4,7 @@ import { ResourceProps, Resource, IResource } from './base';
 import * as cdk8s from 'cdk8s';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as minimatch from 'minimatch';
 
 export interface ConfigMapProps extends ResourceProps {
 
@@ -49,14 +50,56 @@ export class ConfigMap extends Resource implements IConfigMap {
     this.data[key] = value;
   }
 
-  public addDirectory(localDir: string, keyPrefix: string = '') {
+  public addDirectory(localDir: string, options: AddDirectoryOptions = { }) {
+    if (options.recursive) {
+      throw new Error(`"recursive" is not supported (see https://github.com/kubernetes/kubernetes/pull/63362)`);
+    }
+
+    const exclude = options.exclude ?? [];
+    const shouldInclude = (file: string) => {
+      for (const pattern of exclude) {
+        if (minimatch(file, pattern)) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    const keyPrefix = options.keyPrefix ?? '';
     for (const file of fs.readdirSync(localDir)) {
-      const localFile = path.join(localDir, file);
-      if (fs.statSync(localFile).isDirectory()) {
-        this.addDirectory(localFile, file + '/');
+      if (!shouldInclude(file)) {
+        continue;
+      }
+
+      const filePath = path.join(localDir, file);
+      const relativeFilePath = keyPrefix + file;
+      if (options.recursive && fs.statSync(filePath).isDirectory()) {
+        this.addDirectory(filePath, {
+          keyPrefix: relativeFilePath + '/'
+        });
       } else {
-        this.addFile(localFile, `${keyPrefix}${localFile}`);
+        this.addFile(filePath, relativeFilePath);
       }
     }
   }
+}
+
+export interface AddDirectoryOptions {
+  /**
+   * A prefix to add to all keys in the config map.
+   * @default ""
+   */
+  readonly keyPrefix?: string;
+
+  /**
+   * Glob patterns to exclude when adding files.
+   * @default - include all files
+   */
+  readonly exclude?: string[];
+
+  /**
+   * Whether to descend to subdirectories (not supported yet).
+   * @default false
+   */
+  readonly recursive?: boolean;
 }
