@@ -5,7 +5,8 @@ import { Volume } from '../lib';
 const app = new cdk8s.App();
 const chart = new cdk8s.Chart(app, 'MountConfigMap');
 
-const configMap = stdk8s.ConfigMap.fromDirectory(chart, 'Config', '/path/to/config/dir')
+const configMap = new stdk8s.ConfigMap(chart, 'Config');
+configMap.addDirectory('/path/to/config/dir')
 
 const container = new stdk8s.Container({
   image: 'elasticsearch:1.6.5',
