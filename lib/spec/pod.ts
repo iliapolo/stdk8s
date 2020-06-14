@@ -85,6 +85,7 @@ export class PodSpec {
         ports: ports,
         volumeMounts: volumeMounts,
         command: container.command,
+        workingDir: container.workingDir,
         env: renderEnv(container.env),
       });
 

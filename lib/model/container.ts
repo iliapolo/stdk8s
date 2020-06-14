@@ -21,6 +21,14 @@ export interface ContainerProps {
    */
   readonly command?: string[];
 
+  /**
+   * Container's working directory.
+   *
+   * @default - If not specified, the container runtime's default will be used,
+   * which might be configured in the container image. Cannot be updated.
+   */
+  readonly workingDir?: string;
+
   readonly env?: { [name: string]: EnvValue }
 }
 
@@ -60,6 +68,7 @@ export class Container {
   public readonly image: string;
   public readonly port?: number;
   public readonly command?: string[];
+  public readonly workingDir?: string;
   public readonly env: { [name: string]: EnvValue };
 
   constructor(props: ContainerProps) {
@@ -68,6 +77,7 @@ export class Container {
     this.port = props.port;
     this.command = props.command;
     this.env = props.env ?? { };
+    this.workingDir = props.workingDir;
   }
 
   public addEnv(name: string, value: EnvValue) {
