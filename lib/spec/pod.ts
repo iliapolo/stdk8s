@@ -85,7 +85,7 @@ export class PodSpec {
         ports: ports,
         volumeMounts: volumeMounts,
         command: container.command,
-        env: renderEnv(container.env)
+        env: renderEnv(container.env),
       });
 
       if (container.port) {
@@ -108,7 +108,7 @@ export class PodSpec {
         result.push({
           name,
           value: v.value,
-          valueFrom: v.valueFrom
+          valueFrom: v.valueFrom,
         });
       }
       return result;

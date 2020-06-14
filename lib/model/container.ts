@@ -43,9 +43,9 @@ export class EnvValue {
         configMapKeyRef: {
           name: configMap.name,
           key,
-          optional: options.optional
-        }
-      } as k8s.EnvVarSource
+          optional: options.optional,
+        },
+      } as k8s.EnvVarSource,
     };
   }
 

@@ -39,7 +39,7 @@ export class JobSpec {
   public _toKube(): k8s.JobSpec {
     return {
       template: this.template._toKube(),
-      ttlSecondsAfterFinished: this.ttlAfterFinished ? this.ttlAfterFinished.toSeconds() : undefined
+      ttlSecondsAfterFinished: this.ttlAfterFinished ? this.ttlAfterFinished.toSeconds() : undefined,
     };
   }
 }

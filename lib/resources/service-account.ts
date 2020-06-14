@@ -1,7 +1,7 @@
-import { Resource, ResourceProps, IResource } from "./base";
-import { Construct } from "constructs";
+import { Resource, ResourceProps, IResource } from './base';
+import { Construct } from 'constructs';
 import * as k8s from '../../imports/k8s';
-import { ApiObject } from "cdk8s";
+import { ApiObject } from 'cdk8s';
 
 export interface ServiceAccountProps extends ResourceProps {
 
@@ -14,7 +14,7 @@ export interface IServiceAccount extends IResource {
 export class ServiceAccount extends Resource implements IServiceAccount {
   public static fromServiceAccountName(serviceAccountName: string): IServiceAccount {
     return {
-      name: serviceAccountName
+      name: serviceAccountName,
     };
   }
 
@@ -27,7 +27,7 @@ export class ServiceAccount extends Resource implements IServiceAccount {
       metadata: {
         name: this.metadata?.name,
         ...this.metadata?._toKube(),
-      }
+      },
     });
   }
 }
