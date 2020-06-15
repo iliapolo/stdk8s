@@ -13,11 +13,11 @@ Name|Description
 [Job](#stdk8s-job)|*No description*
 [JobSpec](#stdk8s-jobspec)|*No description*
 [ObjectMeta](#stdk8s-objectmeta)|*No description*
-[Pod](#stdk8s-pod)|*No description*
-[PodSpec](#stdk8s-podspec)|*No description*
+[Pod](#stdk8s-pod)|Pod is a collection of containers that can run on a host.
+[PodSpec](#stdk8s-podspec)|A description of a pod.
 [PodTemplate](#stdk8s-podtemplate)|*No description*
 [PodTemplateSpec](#stdk8s-podtemplatespec)|*No description*
-[Resource](#stdk8s-resource)|*No description*
+[Resource](#stdk8s-resource)|Base class for all Kubernetes objects in stdk8s.
 [Secret](#stdk8s-secret)|*No description*
 [Service](#stdk8s-service)|*No description*
 [ServiceAccount](#stdk8s-serviceaccount)|*No description*
@@ -45,10 +45,10 @@ Name|Description
 [JobSpecProps](#stdk8s-jobspecprops)|*No description*
 [ObjectMetaProps](#stdk8s-objectmetaprops)|*No description*
 [PodProps](#stdk8s-podprops)|*No description*
-[PodSpecProps](#stdk8s-podspecprops)|*No description*
+[PodSpecProps](#stdk8s-podspecprops)|Properties for initialization `PodSpec`.
 [PodTemplateProps](#stdk8s-podtemplateprops)|*No description*
 [PodTemplateSpecProps](#stdk8s-podtemplatespecprops)|*No description*
-[ResourceProps](#stdk8s-resourceprops)|*No description*
+[ResourceProps](#stdk8s-resourceprops)|Initialization properties for resources.
 [SecretProps](#stdk8s-secretprops)|*No description*
 [ServiceAccountProps](#stdk8s-serviceaccountprops)|*No description*
 [ServicePort](#stdk8s-serviceport)|*No description*
@@ -65,7 +65,7 @@ Name|Description
 Name|Description
 ----|-----------
 [IConfigMap](#stdk8s-iconfigmap)|*No description*
-[IResource](#stdk8s-iresource)|*No description*
+[IResource](#stdk8s-iresource)|Represents a resource.
 [ISecret](#stdk8s-isecret)|*No description*
 [IServiceAccount](#stdk8s-iserviceaccount)|*No description*
 
@@ -74,7 +74,7 @@ Name|Description
 
 Name|Description
 ----|-----------
-[RestartPolicy](#stdk8s-restartpolicy)|*No description*
+[RestartPolicy](#stdk8s-restartpolicy)|Restart policy for all containers within the pod.
 
 
 
@@ -100,7 +100,7 @@ new ConfigMap(scope: Construct, id: string, props?: ConfigMapProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ConfigMapProps](#stdk8s-configmapprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **binaryData** (<code>Map<string, string></code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
   * **data** (<code>Map<string, string></code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
 
@@ -111,7 +111,7 @@ new ConfigMap(scope: Construct, id: string, props?: ConfigMapProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 
 ### Methods
 
@@ -271,7 +271,7 @@ new Deployment(scope: Construct, id: string, props?: DeploymentProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[DeploymentProps](#stdk8s-deploymentprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **spec** (<code>[DeploymentSpec](#stdk8s-deploymentspec)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -281,7 +281,7 @@ new Deployment(scope: Construct, id: string, props?: DeploymentProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 **spec**🔹 | <code>[DeploymentSpec](#stdk8s-deploymentspec)</code> | <span></span>
 
 ### Methods
@@ -730,7 +730,7 @@ new Job(scope: Construct, id: string, props: JobProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[JobProps](#stdk8s-jobprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **spec** (<code>[JobSpec](#stdk8s-jobspec)</code>)  *No description* 
 
 
@@ -740,7 +740,7 @@ new Job(scope: Construct, id: string, props: JobProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 **spec**🔹 | <code>[JobSpec](#stdk8s-jobspec)</code> | <span></span>
 
 
@@ -856,7 +856,10 @@ addLabel(key: string, value: string): void
 
 ## class Pod 🔹 <a id="stdk8s-pod"></a>
 
+Pod is a collection of containers that can run on a host.
 
+This resource is
+created by clients and scheduled onto hosts.
 
 <span style="text-decoration: underline">Implements</span>: [IConstruct](#constructs-iconstruct), [IResource](#stdk8s-iresource)
 <span style="text-decoration: underline">Extends</span>: [Resource](#stdk8s-resource)
@@ -876,7 +879,7 @@ new Pod(scope: Construct, id: string, props?: PodProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[PodProps](#stdk8s-podprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **spec** (<code>[PodSpec](#stdk8s-podspec)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -886,14 +889,14 @@ new Pod(scope: Construct, id: string, props?: PodProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 **spec**🔹 | <code>[PodSpec](#stdk8s-podspec)</code> | <span></span>
 
 
 
 ## class PodSpec 🔹 <a id="stdk8s-podspec"></a>
 
-
+A description of a pod.
 
 
 ### Initializer
@@ -909,10 +912,10 @@ new PodSpec(props?: PodSpecProps)
 
 <span style="text-decoration: underline">Parameters:</span>
 * **props** (<code>[PodSpecProps](#stdk8s-podspecprops)</code>)  *No description*
-  * **containers** (<code>Array<[Container](#stdk8s-container)></code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
-  * **restartPolicy** (<code>[RestartPolicy](#stdk8s-restartpolicy)</code>)  *No description* <span style="text-decoration: underline">*Default*</span>: RestartPolicy.ALWAYS
-  * **serviceAccout** (<code>[IServiceAccount](#stdk8s-iserviceaccount)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
-  * **volumes** (<code>Array<[Volume](#stdk8s-volume)></code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **containers** (<code>Array<[Container](#stdk8s-container)></code>)  List of containers belonging to the pod. <span style="text-decoration: underline">*Optional*</span>
+  * **restartPolicy** (<code>[RestartPolicy](#stdk8s-restartpolicy)</code>)  Restart policy for all containers within the pod. <span style="text-decoration: underline">*Default*</span>: RestartPolicy.ALWAYS
+  * **serviceAccout** (<code>[IServiceAccount](#stdk8s-iserviceaccount)</code>)  A service account provides an identity for processes that run in a Pod. <span style="text-decoration: underline">*Optional*</span>
+  * **volumes** (<code>Array<[Volume](#stdk8s-volume)></code>)  List of volumes that can be mounted by containers belonging to the pod. <span style="text-decoration: underline">*Default*</span>: no volumes
 
 
 
@@ -921,17 +924,17 @@ new PodSpec(props?: PodSpecProps)
 
 Name | Type | Description 
 -----|------|-------------
-**containers**🔹 | <code>Array<[Container](#stdk8s-container)></code> | <span></span>
-**volumes**🔹 | <code>Array<[Volume](#stdk8s-volume)></code> | <span></span>
-**restartPolicy**?🔹 | <code>[RestartPolicy](#stdk8s-restartpolicy)</code> | <span style="text-decoration: underline">*Optional*</span>
-**serviceAccount**?🔹 | <code>[IServiceAccount](#stdk8s-iserviceaccount)</code> | <span style="text-decoration: underline">*Optional*</span>
+**containers**🔹 | <code>Array<[Container](#stdk8s-container)></code> | List of containers belonging to the pod.
+**volumes**🔹 | <code>Array<[Volume](#stdk8s-volume)></code> | List of volumes that can be mounted by containers belonging to the pod.
+**restartPolicy**?🔹 | <code>[RestartPolicy](#stdk8s-restartpolicy)</code> | Restart policy for all containers within the pod.<br/><span style="text-decoration: underline">*Optional*</span>
+**serviceAccount**?🔹 | <code>[IServiceAccount](#stdk8s-iserviceaccount)</code> | The service account used to run this pod.<br/><span style="text-decoration: underline">*Optional*</span>
 
 ### Methods
 
 
 #### addContainer(container)🔹 <a id="stdk8s-podspec-addcontainer"></a>
 
-
+Adds a container to this pod.
 
 <span style="text-decoration: underline">Usage:</span>
 
@@ -940,14 +943,14 @@ addContainer(container: Container): void
 ```
 
 <span style="text-decoration: underline">Parameters:</span>
-* **container** (<code>[Container](#stdk8s-container)</code>)  *No description*
+* **container** (<code>[Container](#stdk8s-container)</code>)  The container to add.
 
 
 
 
 #### addVolume(volume)🔹 <a id="stdk8s-podspec-addvolume"></a>
 
-
+Adds a volume to this pod.
 
 <span style="text-decoration: underline">Usage:</span>
 
@@ -956,7 +959,7 @@ addVolume(volume: Volume): void
 ```
 
 <span style="text-decoration: underline">Parameters:</span>
-* **volume** (<code>[Volume](#stdk8s-volume)</code>)  *No description*
+* **volume** (<code>[Volume](#stdk8s-volume)</code>)  The volume to add.
 
 
 
@@ -985,7 +988,7 @@ new PodTemplate(scope: Construct, name: string, props: PodTemplateProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 * **props** (<code>[PodTemplateProps](#stdk8s-podtemplateprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **spec** (<code>[PodTemplateSpec](#stdk8s-podtemplatespec)</code>)  *No description* 
 
 
@@ -995,7 +998,7 @@ new PodTemplate(scope: Construct, name: string, props: PodTemplateProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 
 
 
@@ -1034,7 +1037,10 @@ Name | Type | Description
 
 ## class Resource 🔹 <a id="stdk8s-resource"></a>
 
+Base class for all Kubernetes objects in stdk8s.
 
+Represents a single
+resource.
 
 <span style="text-decoration: underline">Implements</span>: [IConstruct](#constructs-iconstruct), [IResource](#stdk8s-iresource)
 <span style="text-decoration: underline">Extends</span>: [Construct](#constructs-construct)
@@ -1055,7 +1061,7 @@ new Resource(scope: Construct, id: string, props: ResourceProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ResourceProps](#stdk8s-resourceprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1064,9 +1070,9 @@ new Resource(scope: Construct, id: string, props: ResourceProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
-**name**🔹 | <code>string</code> | <span></span>
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
+**name**🔹 | <code>string</code> | The name of this API object.
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | The metadata associated with this resource.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1100,7 +1106,7 @@ new Secret(scope: Construct, id: string, props?: SecretProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 
 ### Methods
 
@@ -1145,7 +1151,7 @@ new Service(scope: Construct, id: string, props?: ServiceProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ServiceProps](#stdk8s-serviceprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **spec** (<code>[ServiceSpec](#stdk8s-servicespec)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1155,7 +1161,7 @@ new Service(scope: Construct, id: string, props?: ServiceProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 **spec**🔹 | <code>[ServiceSpec](#stdk8s-servicespec)</code> | <span></span>
 
 
@@ -1182,7 +1188,7 @@ new ServiceAccount(scope: Construct, id: string, props: ServiceAccountProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ServiceAccountProps](#stdk8s-serviceaccountprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1191,7 +1197,7 @@ new ServiceAccount(scope: Construct, id: string, props: ServiceAccountProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 
 ### Methods
 
@@ -1298,7 +1304,7 @@ new StatefulSet(scope: Construct, id: string, props?: StatefulSetProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[StatefulSetProps](#stdk8s-statefulsetprops)</code>)  *No description*
-  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
   * **spec** (<code>[StatefulSetSpec](#stdk8s-statefulsetspec)</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1308,7 +1314,7 @@ new StatefulSet(scope: Construct, id: string, props?: StatefulSetProps)
 
 Name | Type | Description 
 -----|------|-------------
-**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | <span></span>
+**apiObject**🔹 | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 **spec**🔹 | <code>[StatefulSetSpec](#stdk8s-statefulsetspec)</code> | <span></span>
 
 
@@ -1461,7 +1467,7 @@ Name | Type | Description
 -----|------|-------------
 **binaryData**?🔹 | <code>Map<string, string></code> | <span style="text-decoration: underline">*Optional*</span>
 **data**?🔹 | <code>Map<string, string></code> | <span style="text-decoration: underline">*Optional*</span>
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1505,7 +1511,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 **spec**?🔹 | <code>[DeploymentSpec](#stdk8s-deploymentspec)</code> | <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1575,7 +1581,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**name**🔹 | <code>string</code> | <span></span>
+**name**🔹 | <code>string</code> | The Kubernetes name of this resource.
 
 
 
@@ -1583,14 +1589,14 @@ Name | Type | Description
 
 <span style="text-decoration: underline">Implemented by</span>: [ConfigMap](#stdk8s-configmap), [Deployment](#stdk8s-deployment), [Job](#stdk8s-job), [Pod](#stdk8s-pod), [PodTemplate](#stdk8s-podtemplate), [Secret](#stdk8s-secret), [Service](#stdk8s-service), [ServiceAccount](#stdk8s-serviceaccount), [StatefulSet](#stdk8s-statefulset)
 
-
+Represents a resource.
 
 ### Properties
 
 
 Name | Type | Description 
 -----|------|-------------
-**name**🔹 | <code>string</code> | <span></span>
+**name**🔹 | <code>string</code> | The Kubernetes name of this resource.
 
 
 
@@ -1606,7 +1612,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**name**🔹 | <code>string</code> | <span></span>
+**name**🔹 | <code>string</code> | The Kubernetes name of this resource.
 
 
 
@@ -1622,7 +1628,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**name**🔹 | <code>string</code> | <span></span>
+**name**🔹 | <code>string</code> | The Kubernetes name of this resource.
 
 
 
@@ -1636,7 +1642,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **spec**🔹 | <code>[JobSpec](#stdk8s-jobspec)</code> | <span></span>
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1680,7 +1686,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 **spec**?🔹 | <code>[PodSpec](#stdk8s-podspec)</code> | <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1688,16 +1694,16 @@ Name | Type | Description
 ## struct PodSpecProps 🔹 <a id="stdk8s-podspecprops"></a>
 
 
-
+Properties for initialization `PodSpec`.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**containers**?🔹 | <code>Array<[Container](#stdk8s-container)></code> | <span style="text-decoration: underline">*Optional*</span>
-**restartPolicy**?🔹 | <code>[RestartPolicy](#stdk8s-restartpolicy)</code> | <span style="text-decoration: underline">*Default*</span>: RestartPolicy.ALWAYS
-**serviceAccout**?🔹 | <code>[IServiceAccount](#stdk8s-iserviceaccount)</code> | <span style="text-decoration: underline">*Optional*</span>
-**volumes**?🔹 | <code>Array<[Volume](#stdk8s-volume)></code> | <span style="text-decoration: underline">*Optional*</span>
+**containers**?🔹 | <code>Array<[Container](#stdk8s-container)></code> | List of containers belonging to the pod.<br/><span style="text-decoration: underline">*Optional*</span>
+**restartPolicy**?🔹 | <code>[RestartPolicy](#stdk8s-restartpolicy)</code> | Restart policy for all containers within the pod.<br/><span style="text-decoration: underline">*Default*</span>: RestartPolicy.ALWAYS
+**serviceAccout**?🔹 | <code>[IServiceAccount](#stdk8s-iserviceaccount)</code> | A service account provides an identity for processes that run in a Pod.<br/><span style="text-decoration: underline">*Optional*</span>
+**volumes**?🔹 | <code>Array<[Volume](#stdk8s-volume)></code> | List of volumes that can be mounted by containers belonging to the pod.<br/><span style="text-decoration: underline">*Default*</span>: no volumes
 
 
 
@@ -1711,7 +1717,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **spec**🔹 | <code>[PodTemplateSpec](#stdk8s-podtemplatespec)</code> | <span></span>
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1732,13 +1738,13 @@ Name | Type | Description
 ## struct ResourceProps 🔹 <a id="stdk8s-resourceprops"></a>
 
 
-
+Initialization properties for resources.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1757,7 +1763,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -1784,7 +1790,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 **spec**?🔹 | <code>[ServiceSpec](#stdk8s-servicespec)</code> | <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1814,7 +1820,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | <span style="text-decoration: underline">*Optional*</span>
+**metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 **spec**?🔹 | <code>[StatefulSetSpec](#stdk8s-statefulsetspec)</code> | <span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1862,12 +1868,12 @@ Name | Type | Description
 
 ## enum RestartPolicy 🔹 <a id="stdk8s-restartpolicy"></a>
 
-
+Restart policy for all containers within the pod.
 
 Name | Description
 -----|-----
-**ALWAYS** 🔹|
-**ON_FAILURE** 🔹|
-**NEVER** 🔹|
+**ALWAYS** 🔹|Always restart the pod after it exits.
+**ON_FAILURE** 🔹|Only restart if the pod exits with a non-zero exit code.
+**NEVER** 🔹|Never restart the pod.
 
 
