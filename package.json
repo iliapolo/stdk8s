@@ -20,8 +20,7 @@
     "package": "jsii-pacmak",
     "build": "yarn compile && yarn test && yarn run package",
     "eslint": "eslint . --ext .ts",
-    "docgen": "jsii-docgen",
-    "bootstrap": "yarn install && yarn compile && yarn projen"
+    "docgen": "jsii-docgen"
   },
   "author": {
     "name": "Eli Polonsky",

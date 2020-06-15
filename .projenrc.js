@@ -23,13 +23,6 @@ const project = new JsiiProject({
     'cdk8s-cli': Semver.caret('0.21.0')
   },
   stability: 'experimental',
-  workflowBootstrapSteps: [
-    { run: `yarn bootstrap` }
-  ],
-});
-
-project.addScripts({
-  bootstrap: 'yarn install && yarn compile && yarn projen'
 });
 
 project.gitignore.exclude('/.vscode/', '/package-lock.json')
