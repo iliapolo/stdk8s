@@ -20,7 +20,8 @@ const project = new JsiiProject({
   },
   bundledDependencies: [ 'minimatch' ],
   devDependencies: {
-    'cdk8s-cli': Semver.caret('0.21.0')
+    'cdk8s-cli': Semver.caret('0.21.0'),
+    '@types/minimatch': Semver.caret('3.0.3'),
   },
   stability: 'experimental',
 });
