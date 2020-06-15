@@ -3474,7 +3474,7 @@ jsesc@^2.5.1:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
 
-jsii-diff@^1.5.0:
+jsii-diff@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/jsii-diff/-/jsii-diff-1.6.0.tgz#a8b2cd56fd1fd77de37061c38a6434c70c235a41"
   integrity sha512-m/xS549AtR/dK6crArmJeYHaJACwv+tj/koLsn2cKmPqfK2z6FcSgKjOnQH+Q2PlgsJWVUlyaVvhQlnj+W78kw==
@@ -3515,7 +3515,7 @@ jsii-pacmak@1.1.0:
     xmlbuilder "^15.0.0"
     yargs "^15.3.0"
 
-jsii-pacmak@^1.5.0:
+jsii-pacmak@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/jsii-pacmak/-/jsii-pacmak-1.6.0.tgz#d25e162b16328b50e89c3927d996a277b6acb865"
   integrity sha512-Ces8X36Ccyq5AZjzpznFUfV5wd0Ol0hiprJwtGHhs5vug5uJFLZxdS0hPFBFFPLiXQWwsEToWyM7PQ+xakTTpg==
@@ -3579,7 +3579,7 @@ jsii@1.1.0:
     typescript "~3.8.3"
     yargs "^15.3.0"
 
-jsii@^1.5.0:
+jsii@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.6.0.tgz#35a60fed491bb3e4fa2c35965f9f2bb8593f2165"
   integrity sha512-g9L2xBnKCrzfMPkaioYSz8lYATYGt8SWimycq9HxfszaI0/QjKv+68E5pgTimy6EZil+2O/KguiYqlK9jNQE7A==
@@ -4540,10 +4540,10 @@ progress@^2.0.0:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-projen@^0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.1.22.tgz#4c1b756fd7bbe42a7cf8bd6862c0b15eaaa2359e"
-  integrity sha512-1A+QRQgxPepOQ9iyQrvT1Hhugfu8RkJhSLPfIKEpI5olLU84eerKJv24Me6u5r789uUuss6DN+no7MRqgYR41A==
+projen@^0.1.23:
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.1.23.tgz#06683c3619a30655dfe56a70f4cd4f836fa665bb"
+  integrity sha512-mMVMu3dkQQFvwH5fiuVZ4ToCaDQfCbxBfPoWBgFI9WD5OwmEmGEYzOhru56zqhLc+4+x4c7F+5N5X9hHEsB9+w==
   dependencies:
     constructs "2.0.1"
     yaml "^1.9.2"

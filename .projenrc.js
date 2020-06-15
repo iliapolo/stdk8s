@@ -6,7 +6,7 @@ const cdk8sDependency = Semver.caret('0.25.0')
 const project = new JsiiProject({
   name: 'stdk8s',
   commitPackageJson: true,
-  jsiiVersion: Semver.caret('1.5.0'),
+  jsiiVersion: Semver.caret('1.6.0'),
   description: 'High level abstractions on top of cdk8s',
   repository: 'https://github.com/iliapolo/stdk8s.git',
   authorName: 'Eli Polonsky',

@@ -4,7 +4,7 @@
 
 Name|Description
 ----|-----------
-[ConfigMap](#stdk8s-configmap)|*No description*
+[ConfigMap](#stdk8s-configmap)|ConfigMap holds configuration data for pods to consume.
 [Container](#stdk8s-container)|*No description*
 [Deployment](#stdk8s-deployment)|*No description*
 [DeploymentSpec](#stdk8s-deploymentspec)|*No description*
@@ -32,8 +32,8 @@ Name|Description
 
 Name|Description
 ----|-----------
-[AddDirectoryOptions](#stdk8s-adddirectoryoptions)|*No description*
-[ConfigMapProps](#stdk8s-configmapprops)|*No description*
+[AddDirectoryOptions](#stdk8s-adddirectoryoptions)|Options for `configmap.addDirectory()`.
+[ConfigMapProps](#stdk8s-configmapprops)|Initialization props for config maps.
 [ConfigMapVolumeSource](#stdk8s-configmapvolumesource)|*No description*
 [ContainerProps](#stdk8s-containerprops)|*No description*
 [DeploymentProps](#stdk8s-deploymentprops)|*No description*
@@ -64,7 +64,7 @@ Name|Description
 
 Name|Description
 ----|-----------
-[IConfigMap](#stdk8s-iconfigmap)|*No description*
+[IConfigMap](#stdk8s-iconfigmap)|Represents a config map.
 [IResource](#stdk8s-iresource)|Represents a resource.
 [ISecret](#stdk8s-isecret)|*No description*
 [IServiceAccount](#stdk8s-iserviceaccount)|*No description*
@@ -80,7 +80,7 @@ Name|Description
 
 ## class ConfigMap 🔹 <a id="stdk8s-configmap"></a>
 
-
+ConfigMap holds configuration data for pods to consume.
 
 <span style="text-decoration: underline">Implements</span>: [IConstruct](#constructs-iconstruct), [IResource](#stdk8s-iresource), [IConfigMap](#stdk8s-iconfigmap), [IResource](#stdk8s-iresource)
 <span style="text-decoration: underline">Extends</span>: [Resource](#stdk8s-resource)
@@ -101,8 +101,8 @@ new ConfigMap(scope: Construct, id: string, props?: ConfigMapProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ConfigMapProps](#stdk8s-configmapprops)</code>)  *No description*
   * **metadata** (<code>[ObjectMeta](#stdk8s-objectmeta)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. <span style="text-decoration: underline">*Optional*</span>
-  * **binaryData** (<code>Map<string, string></code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
-  * **data** (<code>Map<string, string></code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
+  * **binaryData** (<code>Map<string, string></code>)  BinaryData contains the binary data. <span style="text-decoration: underline">*Optional*</span>
+  * **data** (<code>Map<string, string></code>)  Data contains the configuration data. <span style="text-decoration: underline">*Optional*</span>
 
 
 
@@ -116,9 +116,46 @@ Name | Type | Description
 ### Methods
 
 
+#### addBinaryData(key, value)🔹 <a id="stdk8s-configmap-addbinarydata"></a>
+
+Adds a binary data entry to the config map.
+
+BinaryData can contain byte
+sequences that are not in the UTF-8 range.
+
+<span style="text-decoration: underline">Usage:</span>
+
+```ts
+addBinaryData(key: string, value: string): void
+```
+
+<span style="text-decoration: underline">Parameters:</span>
+* **key** (<code>string</code>)  The key.
+* **value** (<code>string</code>)  The value.
+
+
+
+
+#### addData(key, value)🔹 <a id="stdk8s-configmap-adddata"></a>
+
+Adds a data entry to the config map.
+
+<span style="text-decoration: underline">Usage:</span>
+
+```ts
+addData(key: string, value: string): void
+```
+
+<span style="text-decoration: underline">Parameters:</span>
+* **key** (<code>string</code>)  The key.
+* **value** (<code>string</code>)  The value.
+
+
+
+
 #### addDirectory(localDir, options?)🔹 <a id="stdk8s-configmap-adddirectory"></a>
 
-
+Adds a directory to the ConfigMap.
 
 <span style="text-decoration: underline">Usage:</span>
 
@@ -127,8 +164,8 @@ addDirectory(localDir: string, options?: AddDirectoryOptions): void
 ```
 
 <span style="text-decoration: underline">Parameters:</span>
-* **localDir** (<code>string</code>)  *No description*
-* **options** (<code>[AddDirectoryOptions](#stdk8s-adddirectoryoptions)</code>)  *No description*
+* **localDir** (<code>string</code>)  A path to a local directory.
+* **options** (<code>[AddDirectoryOptions](#stdk8s-adddirectoryoptions)</code>)  Options.
   * **exclude** (<code>Array<string></code>)  Glob patterns to exclude when adding files. <span style="text-decoration: underline">*Default*</span>: include all files
   * **keyPrefix** (<code>string</code>)  A prefix to add to all keys in the config map. <span style="text-decoration: underline">*Default*</span>: ""
   * **recursive** (<code>boolean</code>)  Whether to descend to subdirectories (not supported yet). <span style="text-decoration: underline">*Default*</span>: false
@@ -138,7 +175,7 @@ addDirectory(localDir: string, options?: AddDirectoryOptions): void
 
 #### addFile(localFile, key?)🔹 <a id="stdk8s-configmap-addfile"></a>
 
-
+Adds a file to the ConfigMap.
 
 <span style="text-decoration: underline">Usage:</span>
 
@@ -147,15 +184,15 @@ addFile(localFile: string, key?: string): void
 ```
 
 <span style="text-decoration: underline">Parameters:</span>
-* **localFile** (<code>string</code>)  *No description*
-* **key** (<code>string</code>)  *No description*
+* **localFile** (<code>string</code>)  The path to the local file.
+* **key** (<code>string</code>)  The ConfigMap key (default to the file name).
 
 
 
 
 #### *static* fromConfigMapName(name)🔹 <a id="stdk8s-configmap-fromconfigmapname"></a>
 
-
+Represents a ConfigMap created elsewhere.
 
 <span style="text-decoration: underline">Usage:</span>
 
@@ -164,7 +201,7 @@ static fromConfigMapName(name: string): IConfigMap
 ```
 
 <span style="text-decoration: underline">Parameters:</span>
-* **name** (<code>string</code>)  *No description*
+* **name** (<code>string</code>)  The name of the config map to import.
 
 <span style="text-decoration: underline">Returns</span>:
 * <code>[IConfigMap](#stdk8s-iconfigmap)</code>
@@ -1444,7 +1481,7 @@ Name | Type | Description
 ## struct AddDirectoryOptions 🔹 <a id="stdk8s-adddirectoryoptions"></a>
 
 
-
+Options for `configmap.addDirectory()`.
 
 
 
@@ -1459,14 +1496,14 @@ Name | Type | Description
 ## struct ConfigMapProps 🔹 <a id="stdk8s-configmapprops"></a>
 
 
-
+Initialization props for config maps.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**binaryData**?🔹 | <code>Map<string, string></code> | <span style="text-decoration: underline">*Optional*</span>
-**data**?🔹 | <code>Map<string, string></code> | <span style="text-decoration: underline">*Optional*</span>
+**binaryData**?🔹 | <code>Map<string, string></code> | BinaryData contains the binary data.<br/><span style="text-decoration: underline">*Optional*</span>
+**data**?🔹 | <code>Map<string, string></code> | Data contains the configuration data.<br/><span style="text-decoration: underline">*Optional*</span>
 **metadata**?🔹 | <code>[ObjectMeta](#stdk8s-objectmeta)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/><span style="text-decoration: underline">*Optional*</span>
 
 
@@ -1574,7 +1611,7 @@ Name | Type | Description
 <span style="text-decoration: underline">Implemented by</span>: [ConfigMap](#stdk8s-configmap)
 <span style="text-decoration: underline">Obtainable from</span>: [ConfigMap](#stdk8s-configmap).[fromConfigMapName](#stdk8s-configmap#stdk8s-configmap-fromconfigmapname)()
 
-
+Represents a config map.
 
 ### Properties
 
