@@ -12,8 +12,11 @@ export interface PodProps extends ResourceProps {
 
 }
 
+/**
+ * Pod is a collection of containers that can run on a host. This resource is
+ * created by clients and scheduled onto hosts.
+ */
 export class Pod extends Resource {
-
   public readonly apiObject: cdk8s.ApiObject;
 
   public readonly spec: PodSpec;
@@ -34,31 +37,95 @@ export class Pod extends Resource {
 
 }
 
+/**
+ * Properties for initialization `PodSpec`.
+ */
 export interface PodSpecProps {
-
+  /**
+   * List of containers belonging to the pod. Containers cannot currently be
+   * added or removed. There must be at least one container in a Pod.
+   *
+   * You can add additionnal containers using `podSpec.addContainer()`
+   */
   readonly containers?: Container[];
 
+  /**
+   * List of volumes that can be mounted by containers belonging to the pod.
+   *
+   * You can also add volumes later using `podSpec.addVolume()`
+   *
+   * @see https://kubernetes.io/docs/concepts/storage/volumes
+   * @default - no volumes
+   */
   readonly volumes?: Volume[];
 
   /**
+   * Restart policy for all containers within the pod.
+   *
+   * @see https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
    * @default RestartPolicy.ALWAYS
    */
   readonly restartPolicy?: RestartPolicy;
 
+  /**
+   * A service account provides an identity for processes that run in a Pod.
+   *
+   * When you (a human) access the cluster (for example, using kubectl), you are
+   * authenticated by the apiserver as a particular User Account (currently this
+   * is usually admin, unless your cluster administrator has customized your
+   * cluster). Processes in containers inside pods can also contact the
+   * apiserver. When they do, they are authenticated as a particular Service
+   * Account (for example, default).
+   *
+   * @see
+   * https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+   */
   readonly serviceAccout?: IServiceAccount;
 }
 
+/**
+ * Restart policy for all containers within the pod.
+ */
 export enum RestartPolicy {
+  /**
+   * Always restart the pod after it exits.
+   */
   ALWAYS = 'Always',
+
+  /**
+   * Only restart if the pod exits with a non-zero exit code.
+   */
   ON_FAILURE = 'OnFailure',
+
+  /**
+   * Never restart the pod.
+   */
   NEVER = 'Never'
 }
 
+/**
+ * A description of a pod.
+ */
 export class PodSpec {
+  /**
+   * List of containers belonging to the pod. Containers cannot currently be
+   * added or removed. There must be at least one container in a Pod.
+   */
+  public readonly containers: Container[];
 
-  public containers: Container[];
-  public volumes: Volume[];
+  /**
+   * List of volumes that can be mounted by containers belonging to the pod.
+   */
+  public readonly volumes: Volume[];
+
+  /**
+   * Restart policy for all containers within the pod.
+   */
   public restartPolicy?: RestartPolicy;
+
+  /**
+   * The service account used to run this pod.
+   */
   public serviceAccount?: IServiceAccount;
 
   constructor(props: PodSpecProps = {}) {
@@ -68,10 +135,18 @@ export class PodSpec {
     this.serviceAccount = props.serviceAccout;
   }
 
+  /**
+   * Adds a container to this pod.
+   * @param container The container to add
+   */
   public addContainer(container: Container): void {
     this.containers.push(container);
   }
 
+  /**
+   * Adds a volume to this pod.
+   * @param volume The volume to add
+   */
   public addVolume(volume: Volume): void {
     this.volumes.push(volume);
   }
@@ -146,5 +221,4 @@ export class PodSpec {
       return result;
     }
   }
-
 }
