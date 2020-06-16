@@ -62,3 +62,17 @@ Array [
   },
 ]
 `;
+
+exports[`metadata is synthesized 1`] = `
+Array [
+  Object {
+    "apiVersion": "v1",
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "annotations": Object {},
+      "labels": Object {},
+      "name": "my-name",
+    },
+  },
+]
+`;

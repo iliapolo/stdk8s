@@ -1,4 +1,4 @@
-import { ConfigMap } from '../lib';
+import { ConfigMap, ObjectMeta } from '../lib';
 import { Testing } from 'cdk8s';
 
 test('minimal', () => {
@@ -226,5 +226,19 @@ describe('addDirectory() adds all files in a directory to the config map', () =>
     // WHEN
     expect(() => cm.addDirectory(`${__dirname}/fixtures`, { recursive: true })).toThrow(/'recursive' is not supported/);
   });
+});
+
+test('metadata is synthesized', () => {
+
+  const chart = Testing.chart();
+  new ConfigMap(chart, 'my-config-map', {
+    metadata: new ObjectMeta({
+      name: 'my-name',
+    }),
+  });
+
+  // THEN
+  expect(Testing.synth(chart)).toMatchSnapshot();
+
 });
 
