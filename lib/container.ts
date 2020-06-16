@@ -52,6 +52,13 @@ export interface EnvValueFromSecretOptions {
 
 }
 
+export interface EnvValueFromProcessOptions {
+
+  readonly key: string;
+
+  readonly required?: boolean;
+}
+
 
 export class EnvValue {
   public static of(value: string): EnvValue  {
@@ -83,10 +90,22 @@ export class EnvValue {
 
   }
 
-  public static fromLiteralString(value: string): EnvValue {
+  public static fromValue(value: string): EnvValue {
     return {
       value: value,
     };
+  }
+
+  // TODO: not sure about this. lets see how it feels.
+  public static fromProcess(options: EnvValueFromProcessOptions): EnvValue {
+
+    const value = process.env[options.key];
+
+    if (options.required && !value) {
+      throw new Error(`Missing ${options.key} env variable`);
+    }
+
+    return EnvValue.fromValue(value!);
   }
 
   private constructor(public readonly value?: any, public readonly valueFrom?: any) {
