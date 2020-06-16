@@ -39,8 +39,10 @@ Name|Description
 [DeploymentProps](#stdk8s-deploymentprops)|*No description*
 [DeploymentSpecProps](#stdk8s-deploymentspecprops)|*No description*
 [EnvValueFromConfigMapOptions](#stdk8s-envvaluefromconfigmapoptions)|*No description*
+[EnvValueFromProcessOptions](#stdk8s-envvaluefromprocessoptions)|*No description*
 [EnvValueFromSecretOptions](#stdk8s-envvaluefromsecretoptions)|*No description*
 [ExposeOptions](#stdk8s-exposeoptions)|*No description*
+[HostPathVolumeSource](#stdk8s-hostpathvolumesource)|*No description*
 [JobProps](#stdk8s-jobprops)|*No description*
 [JobSpecProps](#stdk8s-jobspecprops)|*No description*
 [ObjectMetaProps](#stdk8s-objectmetaprops)|*No description*
@@ -692,18 +694,20 @@ static fromConfigMap(configMap: IConfigMap, key: string, options?: EnvValueFromC
 <span style="text-decoration: underline">Returns</span>:
 * <code>[EnvValue](#stdk8s-envvalue)</code>
 
-#### *static* fromLiteralString(value)🔹 <a id="stdk8s-envvalue-fromliteralstring"></a>
+#### *static* fromProcess(options)🔹 <a id="stdk8s-envvalue-fromprocess"></a>
 
 
 
 <span style="text-decoration: underline">Usage:</span>
 
 ```ts
-static fromLiteralString(value: string): EnvValue
+static fromProcess(options: EnvValueFromProcessOptions): EnvValue
 ```
 
 <span style="text-decoration: underline">Parameters:</span>
-* **value** (<code>string</code>)  *No description*
+* **options** (<code>[EnvValueFromProcessOptions](#stdk8s-envvaluefromprocessoptions)</code>)  *No description*
+  * **key** (<code>string</code>)  *No description* 
+  * **required** (<code>boolean</code>)  *No description* <span style="text-decoration: underline">*Optional*</span>
 
 <span style="text-decoration: underline">Returns</span>:
 * <code>[EnvValue](#stdk8s-envvalue)</code>
@@ -723,6 +727,22 @@ static fromSecret(secret: ISecret, key: string, options?: EnvValueFromSecretOpti
 * **key** (<code>string</code>)  *No description*
 * **options** (<code>[EnvValueFromSecretOptions](#stdk8s-envvaluefromsecretoptions)</code>)  *No description*
   * **optional** (<code>boolean</code>)  Specify whether the Secret or its key must be defined. <span style="text-decoration: underline">*Default*</span>: false
+
+<span style="text-decoration: underline">Returns</span>:
+* <code>[EnvValue](#stdk8s-envvalue)</code>
+
+#### *static* fromValue(value)🔹 <a id="stdk8s-envvalue-fromvalue"></a>
+
+
+
+<span style="text-decoration: underline">Usage:</span>
+
+```ts
+static fromValue(value: string): EnvValue
+```
+
+<span style="text-decoration: underline">Parameters:</span>
+* **value** (<code>string</code>)  *No description*
 
 <span style="text-decoration: underline">Returns</span>:
 * <code>[EnvValue](#stdk8s-envvalue)</code>
@@ -1148,6 +1168,22 @@ Name | Type | Description
 ### Methods
 
 
+#### addEnvVariable(key)🔹 <a id="stdk8s-secret-addenvvariable"></a>
+
+
+
+<span style="text-decoration: underline">Usage:</span>
+
+```ts
+addEnvVariable(key: string): void
+```
+
+<span style="text-decoration: underline">Parameters:</span>
+* **key** (<code>string</code>)  *No description*
+
+
+
+
 #### *static* fromSecretName(name)🔹 <a id="stdk8s-secret-fromsecretname"></a>
 
 
@@ -1423,6 +1459,7 @@ Name | Type | Description
 -----|------|-------------
 **name**🔹 | <code>string</code> | <span></span>
 **configMap**?🔹 | <code>[ConfigMapVolumeSource](#stdk8s-configmapvolumesource)</code> | <span style="text-decoration: underline">*Optional*</span>
+**hostPath**?🔹 | <code>[HostPathVolumeSource](#stdk8s-hostpathvolumesource)</code> | <span style="text-decoration: underline">*Optional*</span>
 
 ### Methods
 
@@ -1439,6 +1476,22 @@ static fromConfigMap(configMap: IConfigMap): Volume
 
 <span style="text-decoration: underline">Parameters:</span>
 * **configMap** (<code>[IConfigMap](#stdk8s-iconfigmap)</code>)  *No description*
+
+<span style="text-decoration: underline">Returns</span>:
+* <code>[Volume](#stdk8s-volume)</code>
+
+#### *static* fromDirectory(directory)🔹 <a id="stdk8s-volume-fromdirectory"></a>
+
+
+
+<span style="text-decoration: underline">Usage:</span>
+
+```ts
+static fromDirectory(directory: string): Volume
+```
+
+<span style="text-decoration: underline">Parameters:</span>
+* **directory** (<code>string</code>)  *No description*
 
 <span style="text-decoration: underline">Returns</span>:
 * <code>[Volume](#stdk8s-volume)</code>
@@ -1580,6 +1633,20 @@ Name | Type | Description
 
 
 
+## struct EnvValueFromProcessOptions 🔹 <a id="stdk8s-envvaluefromprocessoptions"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**key**🔹 | <code>string</code> | <span></span>
+**required**?🔹 | <code>boolean</code> | <span style="text-decoration: underline">*Optional*</span>
+
+
+
 ## struct EnvValueFromSecretOptions 🔹 <a id="stdk8s-envvaluefromsecretoptions"></a>
 
 
@@ -1603,6 +1670,20 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **port**🔹 | <code>number</code> | <span></span>
+
+
+
+## struct HostPathVolumeSource 🔹 <a id="stdk8s-hostpathvolumesource"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**path**🔹 | <code>string</code> | Path of the directory on the host.
+**type**?🔹 | <code>string</code> | Type for HostPath Volume Defaults to "" More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath.<br/><span style="text-decoration: underline">*Default*</span>: More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 
 
 
