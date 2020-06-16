@@ -167,6 +167,7 @@ export class PodSpec {
       volumes.push({
         name: volume.name,
         configMap: volume.configMap,
+        hostPath: volume.hostPath,
       })
     }
 
