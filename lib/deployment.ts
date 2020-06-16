@@ -33,7 +33,7 @@ export class Deployment extends Resource {
         name: this.metadata?.name,
         ...this.metadata?._toKube(),
       },
-      spec: this.spec._toKube(),
+      spec: this.spec._toKube(Node.of(this)),
     })
   }
 
@@ -46,8 +46,6 @@ export class Deployment extends Resource {
     // create a label and attach it to the deployment pods
     const labelKey = 'cdk8s.deployment'
     const labelValue = Node.of(this).uniqueId
-
-    this.spec.template.metadata.addLabel(labelKey, labelValue);
 
     // TODO: what are the implications of using 'this' as the scope? should we accept as argument?
     const service = new Service(this, 'Service', {
@@ -94,7 +92,17 @@ export class DeploymentSpec {
   /**
    * @internal
    */
-  public _toKube(): k8s.DeploymentSpec {
+  public _toKube(node: Node): k8s.DeploymentSpec {
+
+    // automatically select pods in this deployment
+
+    const selector = 'cdk8s.deployment';
+    const matcher = node.uniqueId;
+
+    this.template.metadata.addLabel(selector, matcher);
+
+    this.selectByLabel(selector, matcher);
+
     return onSynth(() => ({
       replicas: this.replicas,
       template: this.template._toKube(),
