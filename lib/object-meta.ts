@@ -1,5 +1,4 @@
 import * as k8s from '../imports/k8s';
-import { onSynth } from './utils';
 
 export interface ObjectMetaProps {
 
@@ -43,13 +42,13 @@ export class ObjectMeta {
    * @internal
    */
   public _toKube(): k8s.ObjectMeta {
-    return onSynth(() => ({
+    return {
       annotations: this.annotations,
       clusterName: this.clusterName,
       labels: this.labels,
       name: this.name,
       namespace: this.namespace,
-    }));
+    };
   }
 
 }
