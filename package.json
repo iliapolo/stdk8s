@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "projen": "^0.1.17",
-    "standard-version": "^8.0.0",
+    "standard-version": "^8.0.1",
     "jsii": "^1.5.0",
     "jsii-diff": "^1.5.0",
     "jsii-pacmak": "^1.5.0",
